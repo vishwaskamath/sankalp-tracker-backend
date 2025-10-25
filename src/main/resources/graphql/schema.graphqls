@@ -1,0 +1,39 @@
+type Activity {
+    activityId: ID!
+    text: String!
+    done: Boolean!
+    date: String!
+}
+
+type Habit {
+    habitId: ID!
+    text: String!
+    recurrence: String!
+    goal: Int!
+    createdDate: String!
+    completions: [HabitCompletion!]!
+}
+
+type HabitCompletion {
+    completionId: ID!
+    date: String!
+}
+
+type User {
+    userId: ID!
+    username: String!
+    email: String!
+}
+
+type Query {
+    getTodaysActivities(userId: ID!): [Activity!]!
+    getTodaysHabits(userId: ID!): [Habit!]!
+}
+
+type Mutation {
+    registerUser(username: String!, email: String!, password: String!): User!
+    addActivity(text: String!, userId: ID!): Activity!
+    addHabit(text: String!, recurrence: String!, goal: Int!, userId: ID!): Habit!
+    toggleActivityDone(activityId: ID!): Activity!
+    toggleHabitDone(habitId: ID!): Habit!
+}
