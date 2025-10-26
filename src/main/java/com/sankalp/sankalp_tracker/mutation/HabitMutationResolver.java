@@ -18,7 +18,7 @@ public class HabitMutationResolver {
 
     @MutationMapping
     public Habit addHabit(@Argument String text, @Argument String recurrence, @Argument int goal, @Argument Integer userId) {
-        return habitService.addHabit(text, Recurrence.valueOf(recurrence.toUpperCase()), goal, userId);
+        return habitService.addHabit(text, Recurrence.valueOf(recurrence), goal, userId);
     }
 
     @MutationMapping

@@ -7,6 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -25,5 +27,16 @@ public class UserService {
         user.setPasswordHash(passwordEncoder.encode(rawPassword));
         return usersRepository.save(user);
     }
-}
 
+    public Users authenticateUser(String email, String rawPassword) {
+        Optional<Users> maybeUser = usersRepository.findByEmail(email);
+        if (maybeUser.isEmpty()) {
+            throw new RuntimeException("Invalid email or password");
+        }
+        Users user = maybeUser.get();
+        if (!passwordEncoder.matches(rawPassword, user.getPasswordHash())) {
+            throw new RuntimeException("Invalid email or password");
+        }
+        return user;
+    }
+}

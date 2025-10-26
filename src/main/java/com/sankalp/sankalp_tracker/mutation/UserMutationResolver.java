@@ -19,5 +19,9 @@ public class UserMutationResolver {
     public Users registerUser(@Argument String username, @Argument String email, @Argument String password) {
         return userService.registerUser(username, email, password);
     }
-}
 
+    @MutationMapping
+    public Users loginUser(@Argument String email, @Argument String password) {
+        return userService.authenticateUser(email, password);
+    }
+}

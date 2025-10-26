@@ -32,6 +32,7 @@ type Query {
 
 type Mutation {
     registerUser(username: String!, email: String!, password: String!): User!
+    loginUser(email: String!, password: String!): User!
     addActivity(text: String!, userId: ID!): Activity!
     addHabit(text: String!, recurrence: String!, goal: Int!, userId: ID!): Habit!
     toggleActivityDone(activityId: ID!): Activity!
